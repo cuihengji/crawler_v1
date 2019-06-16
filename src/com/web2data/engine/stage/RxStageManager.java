@@ -3,7 +3,7 @@ package com.web2data.engine.stage;
 import com.web2data.open.RxStage;
 import com.web2data.open.RxTask;
 
-import user123.app123.recipe3.MyStage;
+import app123.recipe3.MyStage;
 
 public class RxStageManager {
  
