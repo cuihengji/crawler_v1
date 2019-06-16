@@ -1,5 +1,6 @@
 package com.web2data.engine.core;
 
+import java.util.Date;
 import java.util.concurrent.Callable;
 import java.util.concurrent.FutureTask;
 
@@ -14,7 +15,8 @@ import com.web2data.open.RxDatabase;
 import com.web2data.open.RxResult;
 import com.web2data.open.RxStep;
 import com.web2data.open.RxTask;
-import com.web2data.system.scheduler.api.SCHEDULER;
+import com.web2data.system.policy.PolicySys;
+import com.web2data.system.task.TASKSYS;
 import com.web2data.utility.U;
 
 public class Worker {
@@ -28,13 +30,8 @@ public class Worker {
 	
 	private RxTask _task = null;
 	private RxResult _result = null;
-	//public  RxCrawlerImpl _crawler = null;
-	//private RxDatabaseImpl _database = null;
 	private RxStep _step = null;
 
-	//public RxResult _rxResult = null;
-	
-	
 	private int _sessionType = -1;
 	private int _sessionIndex = -1;
 	
@@ -84,7 +81,7 @@ public class Worker {
     	_status = -1;
 
 		// 从Scheduler取一个任务, 在fetchNewTask()中判断是否违反 FactoryIP Policy. 注意： 先计算目标队列，再取消息
-		_task = SCHEDULER.fetchNewTask();
+		_task = TASKSYS.fetchNewTask();
 		
 		
 		// 没有任务则迅速返回
@@ -93,7 +90,7 @@ public class Worker {
 			
 			//  for testing
 			_task = new RxTask();
-			_task.setExecutionTimeoutSeconds( 30 );
+			_task.setTimeoutSeconds( 30 );
 		}
 		
 		
@@ -168,6 +165,8 @@ public class Worker {
 
     			//_tasksCompleted++;
     			//System.out.println( " ================ " + _sessionType + " " + _sessionIndex + " " + _tasksCompleted );
+    			
+    			_finishTask();
     			break;
     		}
     		
@@ -182,6 +181,8 @@ public class Worker {
     			
     			_result.setFinishedCode( R.CODE_891 );
     			_result.log( "Task被手工终止" );
+    			
+    			_finishTask();
 				break;
     		}
     		
@@ -197,6 +198,8 @@ public class Worker {
     			
     			_result.setFinishedCode( R.CODE_892 );
     			_result.log( "Task执行超时" );
+    			
+    			_finishTask();
 				break;
     		}
     		
@@ -207,8 +210,8 @@ public class Worker {
 
     		System.out.print("<7>");
     		
-    		U.sleepSeconds( 2 );
-    		eclapsedSeconds =+ 2;
+    		U.sleepSeconds( 1 );
+    		eclapsedSeconds =+ 1;
     		
     		//LOG.info("+1	" + eclapsedSeconds );
     		
@@ -260,31 +263,50 @@ public class Worker {
 //	
 	
 	// 做好准备工作： Task, Crawler, Database, Stage, Result
-	public boolean prepareResourceForTask( String env, RxTask arg ) {
-		
-		// _reset()
-		
-		_task = arg;
-	
-		// 出现的各种异常，记录到Task中, 96x
-		_step = RxStepManager.getStepForTask( _task );
-		
-		_result = new RxResult();
-		
-		// 出现的各种异常，记录到Task中, 97x
-		//_database = RxDatabaseImpl.openDatabaseForTask( _task );
-		
-		// 出现的各种异常，记录到Task中, 98x
-		//if ( _crawler == null ) {
-		//	_crawler = RxCrawlerImpl.getRxCrawlerForCurrentSession();
-		//}
-		
-		return true;
-	}
+//	public boolean _prepareResourceForTask( String env, RxTask arg ) {
+//		
+//		// _reset()
+//		
+//		_task = arg;
+//	
+//		// 出现的各种异常，记录到Task中, 96x
+//		_step = RxStepManager.getStepForTask( _task );
+//		
+//		_result = new RxResult();
+//		
+//		// 出现的各种异常，记录到Task中, 97x
+//		//_database = RxDatabaseImpl.openDatabaseForTask( _task );
+//		
+//		// 出现的各种异常，记录到Task中, 98x
+//		//if ( _crawler == null ) {
+//		//	_crawler = RxCrawlerImpl.getRxCrawlerForCurrentSession();
+//		//}
+//		
+//		return true;
+//	}
 	
 	
 	// 
-	public void releaseResource() {
+	public void _finishTask() {
+		
+		// 把执行完的时间, 更新到缓存的Policy的信息中
+		//key: stepId
+		//value: longTimeMills.
+		PolicySys.keep( _step.getId(), System.currentTimeMillis() );
+		
+		
+		//
+		_task = null;
+		_step = null;
+		_result = null;
+		
+		//_database.closeDatabase();
+		
+		return;
+	}
+	
+	// 
+	public void releaseResource2() {
 		// 
 		_task = null;
 		//_stage = null;
@@ -399,7 +421,9 @@ class WorkCallable implements Callable<Void> {
     	} catch ( Throwable e ) {
     		//_task.setFinishedCode( R.CODE_999 );
     		//_task.log( e.getMessage() + e.getLocalizedMessage() );
-    		System.out.println( e.getMessage() + e.getLocalizedMessage() );
+    		//System.out.println( e.getMessage() + e.getLocalizedMessage() );
+    	} finally {
+    		//
     	}
     	
     	//_status = STOPPED;
