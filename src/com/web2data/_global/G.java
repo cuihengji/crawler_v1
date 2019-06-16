@@ -10,7 +10,16 @@ public class G {
 	
 	// 以下这些信息都应该从 Config.properties 获得
 	
+	
+	public static final String TEST = "TEST";
+	public static final String PROD = "PROD";
+	
+	
 	public static final String CRAWKER_ENV = "TEST";
+	
+	public static final int FACTORY_HOST_ID = 123;
+	
+	public static final String INFRA_HOST_AND_PORT = "192.168.1.10:8080";
 	
 	public static final int CRAWLER_SEQ = 123;
 	
