@@ -13,6 +13,39 @@ public class RxTask {
 	public static int _PRODUCTION = 1;
 	
 	
+	private int _appId = -1;
+	private int _recipeIndex = -1;
+	private int _stepIndex = -1;
+	
+	public String getStepId() {
+		return _appId + "-" + _recipeIndex + "-" + _stepIndex ;
+	}
+	
+	
+	public int get_appId() {
+		return _appId;
+	}
+
+	public void set_appId(int _appId) {
+		this._appId = _appId;
+	}
+
+	public int get_recipeIndex() {
+		return _recipeIndex;
+	}
+
+	public void set_recipeIndex(int _recipeIndex) {
+		this._recipeIndex = _recipeIndex;
+	}
+
+	public int get_stepIndex() {
+		return _stepIndex;
+	}
+
+	public void set_stepIndex(int _stepIndex) {
+		this._stepIndex = _stepIndex;
+	}
+	
 
 	//private int finishedCode = -1;
 	
@@ -121,7 +154,7 @@ public class RxTask {
 		return executionTimeoutSeconds;
 	}
 
-	public RxTask setExecutionTimeoutSeconds(int executionTimeoutSeconds) {
+	public RxTask setTimeoutSeconds(int executionTimeoutSeconds) {
 		this.executionTimeoutSeconds = executionTimeoutSeconds;
 		return this;
 	}

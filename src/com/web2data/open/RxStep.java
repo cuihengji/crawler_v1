@@ -9,9 +9,47 @@ import com.web2data.engine.service.ProxyPoolInfra;
 public abstract class RxStep {
 
 	
-	public boolean _IN_TEST_ENVIRONMENT;
+	private int _appId = -1;
+	private int _recipeIndex = -1;
+	private int _stepIndex = -1;
 	
-	public boolean _IN_PRODUCTION_ENVIRONMENT;
+	public String getId() {
+		return _appId + "-" + _recipeIndex + "-" + _stepIndex ;
+	}
+	
+	
+	public int get_appId() {
+		return _appId;
+	}
+
+	public void set_appId(int _appId) {
+		this._appId = _appId;
+	}
+
+	public int get_recipeIndex() {
+		return _recipeIndex;
+	}
+
+	public void set_recipeIndex(int _recipeIndex) {
+		this._recipeIndex = _recipeIndex;
+	}
+
+	public int get_stepIndex() {
+		return _stepIndex;
+	}
+
+	public void set_stepIndex(int _stepIndex) {
+		this._stepIndex = _stepIndex;
+	}
+
+
+
+
+
+
+	public boolean IS_IN_TEST_ENV;
+	
+	public boolean IS_IN_PROD_ENV;
 	
 	protected HttpClientInfra HTTPCLIENT = null; // com.web2data.engine.crawler.httpClient
 	
