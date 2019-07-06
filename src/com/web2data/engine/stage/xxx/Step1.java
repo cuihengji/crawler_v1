@@ -12,6 +12,13 @@ import com.web2data.utility.U;
 
 public class Step1 extends RxAdvancedStep {
 
+	
+	@Override
+	protected RxTask createTestTask() {
+		//
+		return null;
+	}
+	
 	@Override
 	public void execute( RxTask task, RxResult result ) {
 		

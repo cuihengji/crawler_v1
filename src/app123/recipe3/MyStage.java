@@ -1,5 +1,5 @@
-//package app123.recipe3;
-package user123.app123.recipe123.step3.$version;
+package app123.recipe3;
+//package user123.app123.recipe123.step3.$version;
 
 
 import java.util.Date;

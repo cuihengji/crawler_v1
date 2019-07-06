@@ -10,6 +10,14 @@ import com.web2data.utility.U;
 
 public class Step2 extends RxSimpleStep {
 
+	
+	@Override
+	protected RxTask createTestTask() {
+		//
+		return null;
+	}
+	
+	
 	@Override
 	public void execute( RxTask myTask, RxResult result ) {
 		

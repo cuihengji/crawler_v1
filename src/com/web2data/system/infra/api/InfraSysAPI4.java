@@ -1,4 +1,4 @@
-package com.web2data.system.infra;
+package com.web2data.system.infra.api;
 
 import java.util.HashMap;
 import java.util.Map;

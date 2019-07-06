@@ -21,6 +21,20 @@ public class SessionThreadLocal {
 		return false;
 	}
 	
+	public static boolean isSENIOR() {
+		if ( SessionThreadLocal.getSessionType() == SessionType.SENIOR ) {
+			return true;
+		}
+		return false;
+	}
+	
+	public static boolean isJUNIOR() {
+		if ( SessionThreadLocal.getSessionType() == SessionType.JUNIOR ) {
+			return true;
+		}
+		return false;
+	}
+	
 	
 	// -------------------------------------------------------
 	

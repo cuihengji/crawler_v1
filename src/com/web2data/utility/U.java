@@ -1,5 +1,8 @@
 package com.web2data.utility;
 
+import java.util.List;
+import java.util.Random;
+
 public class U {
 
     public static void sleepMillis( int millis ) {
@@ -20,4 +23,10 @@ public class U {
     	return;
     }
 
+    public static String getRandomElement( List<String> list ) {
+    	if ( list.size() == 0 ) return null;
+    	int n = new Random().nextInt(list.size());
+    	return list.get(n);
+    }
+    
 }
