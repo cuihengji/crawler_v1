@@ -1,5 +1,6 @@
 package com.web2data.system.infra.api;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -12,36 +13,52 @@ import com.web2data.utility.U;
 
 public class API010GetWorker2UserTaskHostsMapOfTheFactory {
 
-	private static long lastReloadTime = 0;
-	
 	public static int _code = -1; // 200 - OK
 	private static Map<String, List<String>> _seniorworker_usertaskhosts_map = null;
 	private static Map<String, List<String>> _juniorworker_usertaskhosts_map = null;
 	
-	
-	// U.getRandomString( List<String> list );
+
+	private static Map<Integer, Long> seniorworker_timeMillis_map = new HashMap<Integer, Long>();
+	private static Map<Integer, Long> juniorworker_timeMillis_map = new HashMap<Integer, Long>();
 	
 	public static synchronized String findOneRandomUserTaskHostForTheWorker(
 			int workerType, int workerIndex ) {
 		
+		Map<Integer, Long> temp = null;
+    	if ( workerType == SessionType.SENIOR ) {
+    		temp = seniorworker_timeMillis_map;
+    	} else {
+    		temp = juniorworker_timeMillis_map;
+    	}
+		
+    	Long lastReloadTime = temp.get(workerIndex);
+    	if ( lastReloadTime == null ) {
+    		lastReloadTime = 0L;
+    	}
+    	
 		if ( (System.currentTimeMillis() - lastReloadTime) > 15*1000 ) {
 			reload();
-			lastReloadTime = System.currentTimeMillis();
+			temp.put(workerIndex, System.currentTimeMillis());
 		}
 		
 		if ( _code != 200 ) {
 			return null;
 		}
 		
-		Map<String, List<String>> temp = null;
+		Map<String, List<String>> temp2 = null;
 		
     	if ( workerType == SessionType.SENIOR ) {
-    		temp = _seniorworker_usertaskhosts_map;
+    		temp2 = _seniorworker_usertaskhosts_map;
     	} else {
-    		temp = _juniorworker_usertaskhosts_map;
+    		temp2 = _juniorworker_usertaskhosts_map;
     	}
     	
-    	return U.getRandomElement( temp.get( workerIndex+"" ) );
+    	List<String> temp3 = temp2.get( workerIndex+"" );
+    	if ( temp3==null || temp3.size()==0 ) {
+    		return null;
+    	}
+    	
+    	return U.getRandomElement( temp3 );
 	}
 
 	
@@ -124,31 +141,31 @@ public class API010GetWorker2UserTaskHostsMapOfTheFactory {
 
 	public static void main(String[] args) {
 
-		String temp = findOneRandomUserTaskHostForTheWorker( SessionType.SENIOR, 3 );
+		String temp = findOneRandomUserTaskHostForTheWorker( SessionType.JUNIOR, 2 );
 		System.out.println("temp1 = " + temp);
 		
-		temp = findOneRandomUserTaskHostForTheWorker( SessionType.SENIOR, 3 );
+		temp = findOneRandomUserTaskHostForTheWorker( SessionType.JUNIOR, 2 );
 		System.out.println("temp2 = " + temp);
 		
-		temp = findOneRandomUserTaskHostForTheWorker( SessionType.SENIOR, 3 );
+		temp = findOneRandomUserTaskHostForTheWorker( SessionType.JUNIOR, 2 );
 		System.out.println("temp3 = " + temp);
 		
-		temp = findOneRandomUserTaskHostForTheWorker( SessionType.SENIOR, 1 );
+		temp = findOneRandomUserTaskHostForTheWorker( SessionType.JUNIOR, 2 );
 		System.out.println("temp4 = " + temp);
 		
-		temp = findOneRandomUserTaskHostForTheWorker( SessionType.SENIOR, 1 );
+		temp = findOneRandomUserTaskHostForTheWorker( SessionType.JUNIOR, 2 );
 		System.out.println("temp5 = " + temp);
 		
-		temp = findOneRandomUserTaskHostForTheWorker( SessionType.SENIOR, 1 );
+		temp = findOneRandomUserTaskHostForTheWorker( SessionType.JUNIOR, 2 );
 		System.out.println("temp6 = " + temp);
 		
-		temp = findOneRandomUserTaskHostForTheWorker( SessionType.SENIOR, 1 );
+		temp = findOneRandomUserTaskHostForTheWorker( SessionType.JUNIOR, 2 );
 		System.out.println("temp7 = " + temp);
 		
-		temp = findOneRandomUserTaskHostForTheWorker( SessionType.SENIOR, 1 );
+		temp = findOneRandomUserTaskHostForTheWorker( SessionType.JUNIOR, 2 );
 		System.out.println("temp8 = " + temp);
 		
-		temp = findOneRandomUserTaskHostForTheWorker( SessionType.SENIOR, 1 );
+		temp = findOneRandomUserTaskHostForTheWorker( SessionType.JUNIOR, 2 );
 		System.out.println("temp9 = " + temp);
 	}
 }
