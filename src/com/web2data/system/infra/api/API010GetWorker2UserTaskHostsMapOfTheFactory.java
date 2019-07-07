@@ -10,7 +10,7 @@ import com.web2data._global.G2;
 import com.web2data._global.SessionType;
 import com.web2data.utility.U;
 
-public class GetWorker2UserTaskHostsMap {
+public class API010GetWorker2UserTaskHostsMapOfTheFactory {
 
 	private static long lastReloadTime = 0;
 	
@@ -57,8 +57,8 @@ public class GetWorker2UserTaskHostsMap {
 				file = HTTP.doGet("");
 			}
 		
-			GetWorker2UserTaskHostsMap json 
-				= JsonUtil.convertJsonStr2Obj(file, GetWorker2UserTaskHostsMap.class);
+			API010GetWorker2UserTaskHostsMapOfTheFactory json 
+				= JsonUtil.convertJsonStr2Obj(file, API010GetWorker2UserTaskHostsMapOfTheFactory.class);
 		
 			_code = json.getCode();
 			_seniorworker_usertaskhosts_map = json.getSeniorworker_usertaskhosts_map();
@@ -78,7 +78,7 @@ public class GetWorker2UserTaskHostsMap {
 	public Map<String, List<String>> seniorworker_usertaskhosts_map = null;
 	public Map<String, List<String>> juniorworker_usertaskhosts_map = null;
 
-	public GetWorker2UserTaskHostsMap() {}
+	public API010GetWorker2UserTaskHostsMapOfTheFactory() {}
 
 
 	public int getCode() {
