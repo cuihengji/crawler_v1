@@ -1,4 +1,4 @@
-package com.web2data.system.task;
+package com.web2data.system.task.api;
 
 public class SchedulerMessage {
 
