@@ -51,11 +51,11 @@ public abstract class RxStep {
 	
 	public boolean IS_IN_PROD_ENV;
 	
-	protected HttpClientInfra HTTPCLIENT = null; // com.web2data.engine.crawler.httpClient
+	//protected HttpClientInfra HTTPCLIENT = null; // com.web2data.engine.crawler.httpClient
 	
-	protected JsoupInfra JSOUP = null; // com.web2data.engine.crawler.jsoupInfra
+	//protected JsoupInfra JSOUP = null; // com.web2data.engine.crawler.jsoupInfra
 	
-	protected DatabaseInfra DATABASE = null;
+	//protected DatabaseInfra DATABASE = null;
 	
 	//protected MySQLDatabaseInfra MYSQLDATABASE = MySQLDatabaseInfra.getInstance();
 	
@@ -66,13 +66,14 @@ public abstract class RxStep {
 	//protected MongoDatabaseInfra MONGODATABASE = MongoDatabaseInfra.getInstance();
 	
 	
-	protected CaptchaCodeInfra CAPTCHACODE = null;
+	//protected CaptchaCodeInfra CAPTCHACODE = null;
 	
-	protected ProxyPoolInfra PROXYPOOL = null;
+	//protected ProxyPoolInfra PROXYPOOL = null;
 	
 	
 	public void _execute( RxTask task, RxResult result ) throws Exception {
 		createTestTask();
+		
 		_before( task, result );
 		execute( task, result );
 		_after( task, result );
@@ -84,15 +85,15 @@ public abstract class RxStep {
 	
 	protected void _before( RxTask task, RxResult result ) throws Exception {
 		
-		HTTPCLIENT = HttpClientInfra.getInstance();; // com.web2data.engine.crawler.httpClient
+		//HTTPCLIENT = HttpClientInfra.getInstance();; // com.web2data.engine.crawler.httpClient
 		
-		JSOUP = JsoupInfra.getInstance(); // com.web2data.engine.crawler.jsoupInfra
+		//JSOUP = JsoupInfra.getInstance(); // com.web2data.engine.crawler.jsoupInfra
 		
-		DATABASE = DatabaseInfra.getInstance();
+		//DATABASE = DatabaseInfra.getInstance();
 		
-		CAPTCHACODE = CaptchaCodeInfra.getInstance();
-		
-		PROXYPOOL = ProxyPoolInfra.getInstance();
+		//CAPTCHACODE = CaptchaCodeInfra.getInstance();
+		//
+		//PROXYPOOL = ProxyPoolInfra.getInstance();
 	}
 	
 	
@@ -102,7 +103,7 @@ public abstract class RxStep {
 	protected void _after( RxTask task, RxResult result ) throws Exception {
 		
 		// 关闭数据库连接
-		DATABASE.releaseDatabaseResource();
+		//DATABASE.releaseDatabaseResource();
 	}
 	
 	// 用于

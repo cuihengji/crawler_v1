@@ -85,7 +85,7 @@ public class MyStage implements RxStage {
 //		
 //		myTask.setFinishedCode( 200 );
 //		
-		myTask.log( "============== Hello World!!! ===============" );
+		myTask.log( "===5== Hello World!!! ======" );
 		
 		return;
 	}

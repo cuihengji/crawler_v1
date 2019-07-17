@@ -10,9 +10,15 @@ public class JsoupInfra {
 	private JsoupInfra() {}
 	
 	
+	public static JsoupInfra newInstance(int sessionType, int sessionIndex) {
+		return new JsoupInfra();
+	}
+	
+	
 	public static JsoupInfra getInstance() {
-		JsoupInfra result = SessionManager.getTheSession(SessionThreadLocal.getSessionType(), 
-				SessionThreadLocal.getSessionIndex())._JsoupInfra;
+		JsoupInfra result = SessionManager
+				.getTheSession(SessionThreadLocal.getSessionType(), SessionThreadLocal.getSessionIndex())
+				._JsoupInfra;
 		if ( result == null ) {
 			//result = new JsoupInfra().newInstance();
 			result = new JsoupInfra();

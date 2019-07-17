@@ -10,6 +10,9 @@ import java.util.List;
 import org.apache.log4j.Logger;
 
 import com.ruixuesoft.crawler.open.RxRule;
+import com.web2data.open.RxStep;
+
+import user123.app123.recipe3.MyStep2;
 
 public class DynamicJarLoader {
     private static final transient Logger logger = Logger.getLogger(DynamicJarLoader.class);
@@ -36,6 +39,32 @@ public class DynamicJarLoader {
             throw ex;
         }
     }
+    
+    /**
+     * 根据指定的jar路径和类名创建类实例
+     * 
+     * @param jarPath
+     *            jar路径(例如:E:\\temp\\Test.jar)
+     * @param className
+     *            类名(例：com.rkylin.Test)
+     * @return 类实例
+     * @throws Exception
+     *             本过程中可能发生的例外
+     */
+    public static synchronized MyStep2 load2(String jarPath, String className) throws Exception {
+        try {
+            // 根据jar路径，加载Jar到classpath
+            loadJar(jarPath);
+            
+            
+            
+            // 创建实例并返回
+            return getInstance2(className);
+        } catch (Exception ex) {
+            logger.error(ex, ex);
+            throw ex;
+        }
+    }
 
     /**
      * 根据指定的jar路径，加载Jar到classpath
@@ -45,7 +74,7 @@ public class DynamicJarLoader {
      * @throws Exception
      *             本过程中可能发生的例外
      */
-    private static void loadJar(String jarPath) throws Exception {
+    public static void loadJar(String jarPath) throws Exception {
     	
     	logger.info("loadJar jarPath:" + jarPath);
     	
@@ -75,6 +104,20 @@ public class DynamicJarLoader {
     private static RxRule getInstance(String className) throws Exception {
     	logger.info("getInstance className:" + className);
         return (RxRule) DynamicJarLoader.class.getClassLoader().loadClass(className).getConstructor().newInstance();
+    }
+    
+    /**
+     * 根据类名创建类实例
+     * 
+     * @param className
+     *            类名(例：com.rkylin.Test)
+     * @return 类实例
+     * @throws Exception
+     *             本过程中可能发生的例外
+     */
+    private static MyStep2 getInstance2(String className) throws Exception {
+    	logger.info("getInstance className:" + className);
+        return (MyStep2) DynamicJarLoader.class.getClassLoader().loadClass(className).getConstructor().newInstance();
     }
 
     /**

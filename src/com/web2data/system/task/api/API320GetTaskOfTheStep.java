@@ -16,12 +16,16 @@ public class API320GetTaskOfTheStep {
 	private static RxTask fetchTask(
 			int userId, int taskHostId, int queueType, String step ) {
 		
+		//if (step.equals("900-3-1") || step.equals("900-3-2") ) return null;
+		
 		RxTask result = new RxTask();
 		
 		result.setEnv( queueType );
 		result.setAppId( Integer.valueOf( step.split("-")[0] ) );
 		result.setRecipeIndex( Integer.valueOf( step.split("-")[1] ) );
 		result.setStepIndex( Integer.valueOf( step.split("-")[2] ) );
+		
+		result.setJar_version(789);
 		
 		result.setX1( step );
 

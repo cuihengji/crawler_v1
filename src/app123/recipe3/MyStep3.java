@@ -84,7 +84,7 @@ public class MyStep3 extends RxAdvancedStep {
 //		
 //		myTask.setFinishedCode( 200 );
 //		
-		myTask.log( "============== Hello World!!! ===============" );
+		myTask.log( "==== Hello World!!! ====" );
 		
 		return;
 	}

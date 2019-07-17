@@ -49,13 +49,13 @@ public class MyStep extends RxAdvancedStep {
 		
 		// Running in an Isolated Environment - Windows 7 Tutorial
 		
-		if ( _IN_TEST_ENVIRONMENT ) {
+		//if ( _IN_TEST_ENVIRONMENT ) {
 			//
-		}
+		//}
 		
-		if ( _IN_PRODUCTION_ENVIRONMENT ) {
+		//if ( _IN_PRODUCTION_ENVIRONMENT ) {
 			//
-		}
+		//}
 		
 		
 //		// 可以直接使用 CAPTCHACODE 的方法实现一些常见简单的验证码服务, 采用这种方式，选择的是 默认的序号最小的 Service

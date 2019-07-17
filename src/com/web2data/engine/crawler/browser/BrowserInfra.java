@@ -56,16 +56,25 @@ public class BrowserInfra {
 	}
 	
 	
-	private BrowserInfra() {
+	private int sessionType = -1, sessionIndex = -1;
+	
+	
+	private BrowserInfra(int sessionType, int sessionIndex) {
 		//
+		this.sessionType = sessionType;
+		this.sessionIndex = sessionIndex;
 	}
-	
-	
+
 	
 	// 把浏览器过多的TabWindows给关闭
 	public static void reset(){
 		//
 	}
+	
+	
+    public static BrowserInfra newInstance(int sessionType, int sessionIndex) {
+    	return new BrowserInfra(sessionType, sessionIndex);
+    }
 	
 	
     // 如果webdriver没有准备好的话，进行准备
@@ -90,7 +99,7 @@ public class BrowserInfra {
     			BrowserInfra result = SessionManager.getTheSession(SessionThreadLocal.getSessionType(), 
     					SessionThreadLocal.getSessionIndex())._BrowserInfra;
     			if ( result == null ) {
-        			result = new BrowserInfra().newWebDriver();
+        			//result = new BrowserInfra().newWebDriver();
     			}
     		
     		
@@ -148,17 +157,17 @@ public class BrowserInfra {
     }
     
     
-    private BrowserInfra newWebDriver() {
+    public boolean initialize() {
     	
     	logger.info("openWebDriver ---start----");
 		
         //WebDriver driver = null;
         
-        int sessionId = SessionThreadLocal.getSessionIndex();
+        //int sessionId = SessionThreadLocal.getSessionIndex();
 		
 			String originalChromeDriver = WebDriverConfig.WINDOWS_PREFIX + File.separator +  WebDriverConfig.CHROMEDRIVER_V72 + WebDriverConfig.EXE;
 			String chromeDriverPathPrefix = WebDriverConfig.WINDOWS_PREFIX + File.separator + WebDriverConfig.CHROME_DRIVERS_FOLDER + File.separator +  WebDriverConfig.CHROMEDRIVER_V72;
-			String targetChromeDriver = chromeDriverPathPrefix + "_" + StringUtil.preZeroAdd(sessionId) + WebDriverConfig.EXE;
+			String targetChromeDriver = chromeDriverPathPrefix + "_" + StringUtil.preZeroAdd(this.sessionIndex) + WebDriverConfig.EXE;
 			
 			boolean isWindowsHost = ConfigFacade.isWindowsHost();
 			logger.info("isWindowsHost :-->" + isWindowsHost);
@@ -166,14 +175,14 @@ public class BrowserInfra {
 			if (!isWindowsHost) {
 				originalChromeDriver = File.separator + WebDriverConfig.CHROMEDRIVER_V72;
 				chromeDriverPathPrefix = File.separator + WebDriverConfig.CHROME_DRIVERS_FOLDER + File.separator + WebDriverConfig.CHROMEDRIVER_V72;
-				targetChromeDriver = chromeDriverPathPrefix + "_" + StringUtil.preZeroAdd(sessionId);
+				targetChromeDriver = chromeDriverPathPrefix + "_" + StringUtil.preZeroAdd(this.sessionIndex);
 				logger.info("targetChromeDriver :-->" + targetChromeDriver);
 			}
 			
 			
 			
 			try {
-				FileUtil.killChromeProcessOnly(sessionId);
+				FileUtil.killChromeProcessOnly(this.sessionIndex);
 				U.sleepSeconds( 5 );
 					
 //				FileUtil.deleteChromeDriverExe(sessionId);
@@ -181,6 +190,7 @@ public class BrowserInfra {
 
 			} catch (Exception e) {
 				logger.error("FileUtil.file operation exception:", e);
+				return false;
 			}
 			
 			try {
@@ -249,7 +259,7 @@ public class BrowserInfra {
 				}
 				
 				
-				_webDriver.get( "about:blank?index=" + sessionId + "&time=" + new Date() );
+				_webDriver.get( "about:blank?index=" + this.sessionIndex + "&time=" + new Date() );
 				
 				_webDriver.get( "http://www.bing.com" );
 				
@@ -263,10 +273,10 @@ public class BrowserInfra {
 				logger.error("初始化WebDriver失败", e);
 				
 //				FileUtil.killChromeProcessOnly(sessionId);
-				FileUtil.deleteChromeData(sessionId);
+				FileUtil.deleteChromeData(this.sessionIndex);
 ///				continue;
 				
-				throw e;
+				return false;
 			}
 		
         logger.info("driver information == "+ _webDriver);
@@ -274,7 +284,7 @@ public class BrowserInfra {
 /*
         return new WebDriverProxy(driver, crawlerId, sessionId);
 */
-    	return this;
+    	return true;
     }
     
     

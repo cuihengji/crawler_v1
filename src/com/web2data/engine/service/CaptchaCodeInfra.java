@@ -7,6 +7,12 @@ public class CaptchaCodeInfra {
 
 	private CaptchaCodeInfra() {}
 	
+	
+	public static CaptchaCodeInfra newInstance(int sessionType, int sessionIndex) {
+		return new CaptchaCodeInfra();
+	}
+	
+	
 	public static CaptchaCodeInfra getInstance() {
 
 		CaptchaCodeInfra result = SessionManager.getTheSession(SessionThreadLocal.getSessionType(), 
@@ -16,4 +22,5 @@ public class CaptchaCodeInfra {
 		}
 		return result;
 	}
+	
 }

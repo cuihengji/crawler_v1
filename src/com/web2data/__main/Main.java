@@ -18,13 +18,13 @@ public class Main {
     			try {
     				
 	    	    	// 读取本地配置文件 
-	    	    	loadLocalProperties();
+	    	    	//loadLocalProperties();
 	    	    	
 	    	    	// 从 Config系统获得配置
-	    	    	com.web2data.system.config._main.Main.start();
+	    	    	//com.web2data.system.config._main.Main.start();
 	    	    	
 	    	    	// 启动系统监控
-	    	    	com.web2data._monitor._main.Main.start();
+	    	    	//com.web2data._monitor._main.Main.start();
 	    	    	
 	    	    	// 启动主进程
 	    	    	com.web2data.engine.core.SessionManager.start();
@@ -35,11 +35,7 @@ public class Main {
     		} 
     	}; 
     	
-    	//System.out.println( " ================= Hello World !! =================== " );
-    	
     	thread.run();
-    	
-    	//System.out.println( " ================= Hello World !!! =================== " );
     	
     	//while (true) {
     		//U.sleepSeconds( 15 );

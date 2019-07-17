@@ -7,11 +7,16 @@ import org.apache.commons.dbutils.QueryRunner;
 
 import com.web2data._global.SessionThreadLocal;
 import com.web2data.engine.core.SessionManager;
-import com.web2data.engine.crawler.browser.BrowserInfra;
 
 public class DatabaseInfra {
 
 	private DatabaseInfra() {}
+	
+	
+	public static DatabaseInfra newInstance(int sessionType, int sessionIndex) {
+		return new DatabaseInfra();
+	}
+	
 	
 	public static DatabaseInfra getInstance() {
 		//return new DatabaseInfra();

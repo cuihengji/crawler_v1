@@ -8,46 +8,18 @@ public class RxTask {
 	private int executionTimeoutSeconds = 3 * 60 * 60;
 
 	
-	public int _env = -1;
+	public int env = -1;
 	public static int _TEST = 0;
-	public static int _PRODUCTION = 1;
+	public static int _PROD = 1;
 	
 	
-	private int _appId = -1;
-	private int _recipeIndex = -1;
-	private int _stepIndex = -1;
+	private int appId = -1;
+	private int recipeIndex = -1;
+	private int stepIndex = -1;
 	
-	public String getStepId() {
-		return _appId + "-" + _recipeIndex + "-" + _stepIndex ;
-	}
+	private int finished_code = -1;
 	
-	
-	public int get_appId() {
-		return _appId;
-	}
-
-	public void set_appId(int _appId) {
-		this._appId = _appId;
-	}
-
-	public int get_recipeIndex() {
-		return _recipeIndex;
-	}
-
-	public void set_recipeIndex(int _recipeIndex) {
-		this._recipeIndex = _recipeIndex;
-	}
-
-	public int get_stepIndex() {
-		return _stepIndex;
-	}
-
-	public void set_stepIndex(int _stepIndex) {
-		this._stepIndex = _stepIndex;
-	}
-	
-
-	//private int finishedCode = -1;
+	private int jar_version = -1;
 	
 	private String x1 = null;
 	private String x2 = null;
@@ -158,6 +130,88 @@ public class RxTask {
 		this.executionTimeoutSeconds = executionTimeoutSeconds;
 		return this;
 	}
+
+	public int getEnv() {
+		return env;
+	}
+
+	public void setEnv(int env) {
+		this.env = env;
+	}
+
+	public int getAppId() {
+		return appId;
+	}
+
+	public void setAppId(int appId) {
+		this.appId = appId;
+	}
+
+	public int getRecipeIndex() {
+		return recipeIndex;
+	}
+
+	public void setRecipeIndex(int recipeIndex) {
+		this.recipeIndex = recipeIndex;
+	}
+
+	public int getStepIndex() {
+		return stepIndex;
+	}
+
+	public void setStepIndex(int stepIndex) {
+		this.stepIndex = stepIndex;
+	}
+
+	public void setExecutionTimeoutSeconds(int executionTimeoutSeconds) {
+		this.executionTimeoutSeconds = executionTimeoutSeconds;
+	}
+
+	public void setX1(String x1) {
+		this.x1 = x1;
+	}
+
+	public void setX2(String x2) {
+		this.x2 = x2;
+	}
+
+	public void setX3(String x3) {
+		this.x3 = x3;
+	}
+
+	public void setX4(String x4) {
+		this.x4 = x4;
+	}
+
+	public void setX5(String x5) {
+		this.x5 = x5;
+	}
+
+	public void setX6(String x6) {
+		this.x6 = x6;
+	}
+
+	public void setX7(String x7) {
+		this.x7 = x7;
+	}
+
+	public int getJar_version() {
+		return jar_version;
+	}
+
+	public void setJar_version(int jar_version) {
+		this.jar_version = jar_version;
+	}
+
+	public int getFinished_code() {
+		return finished_code;
+	}
+
+	public void setFinished_code(int finished_code) {
+		this.finished_code = finished_code;
+	}
+	
+	
 	
 }
 

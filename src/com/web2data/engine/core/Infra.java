@@ -42,9 +42,9 @@ public class Infra {
 				
 				// Browser.killBrowser(); // 把之前启动的浏览器删掉
 				
-				result._browserInfra = BrowserInfra.getInstance();
-				result._httpClientInfra = HttpClientInfra.getInstance();
-				result._jsoupInfra = JsoupInfra.getInstance();
+				//result._browserInfra = BrowserInfra.getInstance();
+				//result._httpClientInfra = HttpClientInfra.getInstance();
+				//result._jsoupInfra = JsoupInfra.getInstance();
 				
 			} 
 //			else if ( sessionType == SessionType.CHROME_60_BROWSER  ) {

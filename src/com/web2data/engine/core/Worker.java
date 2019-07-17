@@ -1,22 +1,17 @@
 package com.web2data.engine.core;
 
-import java.util.Date;
 import java.util.concurrent.Callable;
 import java.util.concurrent.FutureTask;
 
-import com.web2data._global.Constant;
+
 import com.web2data._global.R;
 import com.web2data._global.SessionThreadLocal;
-import com.web2data.engine.crawler._impl.RxCrawlerImpl;
-import com.web2data.engine.database.impl.RxDatabaseImpl;
+
 import com.web2data.engine.stage.RxStepManager;
-import com.web2data.open.RxCrawler;
-import com.web2data.open.RxDatabase;
 import com.web2data.open.RxResult;
 import com.web2data.open.RxStep;
 import com.web2data.open.RxTask;
-import com.web2data.system.policy.PolicySys;
-import com.web2data.system.task.TASKSYS;
+
 import com.web2data.utility.U;
 
 public class Worker {
@@ -80,26 +75,23 @@ public class Worker {
     	// 重置状态，这个很重要
     	_status = -1;
 
-		// 从Scheduler取一个任务, 在fetchNewTask()中判断是否违反 FactoryIP Policy. 注意： 先计算目标队列，再取消息
-		_task = TASKSYS.fetchNewTask();
-		
+		// 从Scheduler取一个任务, 在fetchTask()中判断是否违反 FactoryIP Policy. 注意： 先计算目标队列，再取消息
+		_task = TaskScheduling.fetchTask2( this._sessionType, this._sessionIndex );
 		
 		// 没有任务则迅速返回
 		if ( _task == null ) {
-			//return false;   //  for testing
-			
-			//  for testing
-			_task = new RxTask();
-			_task.setTimeoutSeconds( 30 );
+			System.out.println( "----------------- _task == null ");
+			return false;
+		} else {
+			System.out.println( "----------------- _task == " + _task.getX1());
 		}
-		
 		
 		// worker 为 aTask 的执行 做好准备工作,包括数据库连接
 		// 901-909 准备的各个环节出现问题
 		//boolean prepareResult = this.prepareResourceForTask(aTask);
 		
 		// 根据 _task.env 设置 _step._IN_TEST_ENVIRONMENT; _step._IN_PRODUCTION_ENVIRONMENT;
-		_step = RxStepManager.getStepForTask( _task );
+		_step = RxStepManager.getStepForTheTask( _task );
 		
 		_result = null;
 		_result = new RxResult();
@@ -150,15 +142,15 @@ public class Worker {
     	//public static int CODE_893 = 893; // Session,java - 893: Task 其他原因被取消执行
     	//public static int CODE_899 = 899; // Worker.java - 899: 返回的RxResult为 null
         
-        System.out.print(0);
+        //System.out.print(0);
         
         while ( true ) {
         	
-        	System.out.print("<1>");
+        	//System.out.print("<1>");
         	
     		// 正常结束
     		if ( futureTask.isDone() ) {
-    			System.out.print("<2>");
+    			//System.out.print("<2>");
     			
     			// 利用客户设置的 status code,作为最终的status code
     			// 获得 this._worker._rxResult;
@@ -172,10 +164,10 @@ public class Worker {
     		
     		// 前端触发手工终止
     		if ( this.isTerminated() ) {
-    			System.out.print("<3>");
+    			//System.out.print("<3>");
     			
     			if ( !futureTask.isCancelled() && !futureTask.isDone() ) {
-    				System.out.print("<4>");
+    				//System.out.print("<4>");
     				futureTask.cancel( true );
     			}
     			
@@ -188,10 +180,10 @@ public class Worker {
     		
     		// 累计到超时
     		if ( eclapsedSeconds > ( _task.getExecutionTimeoutSeconds() ) ) {
-    			System.out.print("<5>");
+    			//System.out.print("<5>");
     			
     			if ( !futureTask.isCancelled() && !futureTask.isDone() ) {
-    				System.out.print("<6>");
+    				//System.out.print("<6>");
     				
     				futureTask.cancel( true );
     			}
@@ -208,7 +200,7 @@ public class Worker {
     		//
     		//}
 
-    		System.out.print("<7>");
+    		//System.out.print("<7>");
     		
     		U.sleepSeconds( 1 );
     		eclapsedSeconds =+ 1;
@@ -223,7 +215,7 @@ public class Worker {
         }
         
         
-        System.out.println("<9>");
+        //System.out.println("<9>");
         
         // worker 释放之前申请的资源,包括数据库连接
      	//this.releaseResource();
@@ -245,10 +237,6 @@ public class Worker {
 
         return true;
 	}
-	
-	//public void assginRxCrawler() {
-	//	this._crawler = RxCrawlerImpl.getRxCrawler();
-	//}
 	
 	
 //	// 执行一个任务，重置一次
@@ -292,7 +280,7 @@ public class Worker {
 		// 把执行完的时间, 更新到缓存的Policy的信息中
 		//key: stepId
 		//value: longTimeMills.
-		PolicySys.keep( _step.getId(), System.currentTimeMillis() );
+		//PolicySys.keep( _step.getId(), System.currentTimeMillis() );
 		
 		
 		//
@@ -421,7 +409,7 @@ class WorkCallable implements Callable<Void> {
     	} catch ( Throwable e ) {
     		//_task.setFinishedCode( R.CODE_999 );
     		//_task.log( e.getMessage() + e.getLocalizedMessage() );
-    		//System.out.println( e.getMessage() + e.getLocalizedMessage() );
+    		System.out.println( e.getMessage() + e.getLocalizedMessage() );
     	} finally {
     		//
     	}

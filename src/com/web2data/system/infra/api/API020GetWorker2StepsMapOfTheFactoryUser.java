@@ -27,12 +27,12 @@ public class API020GetWorker2StepsMapOfTheFactoryUser {
 
 	
 	
-	public static List<String> findStepListForTheUserWorkerInTestEnv( 
+	public static List<String> findTestStepListForTheUserWorker( 
 			int userId, int workerType, int workerIndex ) {
     	return findStepListForTheUserWorker( G2.TEST, userId, workerType, workerIndex );
 	}
 	
-	public static List<String> findStepListForTheUserWorkerInProdEnv( 
+	public static List<String> findProdStepListForTheUserWorker( 
 			int userId, int workerType, int workerIndex ) {
     	return findStepListForTheUserWorker( G2.PROD, userId, workerType, workerIndex );
 	}
@@ -187,12 +187,9 @@ public class API020GetWorker2StepsMapOfTheFactoryUser {
 
 	public static void main(String[] args) {
 
-		List<String> temp = findStepListForTheUserWorkerInTestEnv( 123, SessionType.SENIOR, 1 );
-		
+		List<String> temp = findTestStepListForTheUserWorker( 1, 123, SessionType.SENIOR );
 		
 		// int userId, int factoryId, int workerType, int workerIndex
-		
 		System.out.println("temp1 = " + temp.size());
-		
 	}
 }

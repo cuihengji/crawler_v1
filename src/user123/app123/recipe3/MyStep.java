@@ -208,7 +208,7 @@ public class MyStep extends RxSeniorStep {
 //		
 //		myTask.setFinishedCode( 200 );
 //		
-		myTask.log( "============== Hello World!!! ===============" );
+		myTask.log( "=4==== Hello World!!! ======" );
 		
 		return;
 	}

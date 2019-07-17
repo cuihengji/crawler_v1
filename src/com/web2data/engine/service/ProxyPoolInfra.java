@@ -7,6 +7,12 @@ public class ProxyPoolInfra {
 
 	private ProxyPoolInfra() {}
 	
+	
+	public static ProxyPoolInfra newInstance(int sessionType, int sessionIndex) {
+		return new ProxyPoolInfra();
+	}
+	
+	
 	public static ProxyPoolInfra getInstance() {
 
 		ProxyPoolInfra result = SessionManager.getTheSession(SessionThreadLocal.getSessionType(), 

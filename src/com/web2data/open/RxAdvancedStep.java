@@ -1,5 +1,6 @@
 package com.web2data.open;
 
+import com.web2data._global.SessionThreadLocal;
 import com.web2data.engine.crawler.browser.BrowserInfra;
 
 public abstract class RxAdvancedStep extends RxStep {
@@ -14,7 +15,9 @@ public abstract class RxAdvancedStep extends RxStep {
 	@Override
 	public void _before( RxTask task, RxResult result ) throws Exception {
 		super._before(task, result);
-		BROWSER = BrowserInfra.getInstance();
+		//BROWSER = BrowserInfra.getInstance();
+		
+		BROWSER = SessionThreadLocal.getCurrentSession()._BrowserInfra;
 	}
 	
 	@Override
