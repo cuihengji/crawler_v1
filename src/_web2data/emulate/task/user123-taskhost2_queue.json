@@ -1,0 +1,11 @@
+{
+  "code": 200,
+  "message": "OK",
+
+  "test_queue_list": [ "900-2-1", "900-2-2" ],
+  "prod_queue_list": [ "900-2-1", "900-2-2", "900-2-3" ],
+  
+  "user_id": 123,
+  "task_host_id": 2
+  
+}

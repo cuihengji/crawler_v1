@@ -1,0 +1,33 @@
+{
+  "code": 200,
+  
+  "data": {
+  
+  	"factory_id": 1,
+  	"user_id": 1,
+  	"task_host_id": 1,
+    
+    "seniorworkers_2_steps_mapping": [
+      {
+        "workers": [ 1, 2, 3, 4, 5 ],
+        "steps": [ "1-1-1", "1-1-2" ]
+      },
+      {
+        "workers": [ 6, 7, 8 ],
+        "steps": [ "1-1-1", "1-1-2" ]
+      }
+    ],
+    
+    "juniorworkers_2_steps_mapping": [
+      {
+        "workers": [ 1, 2, 3, 4, 5 ],
+        "steps": [ "1-1-1", "1-1-2" ]
+      },
+      {
+        "workers": [ 6, 7, 8 ],
+        "steps": [ "1-1-1", "1-1-2" ]
+      }
+    ]
+    
+  }
+}

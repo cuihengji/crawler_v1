@@ -1,0 +1,43 @@
+{
+  "code": 200,
+  
+  "data": {
+  
+    "test_queues": [
+      {
+        "step": "12-2-1",
+        "queue": "tm_test_taskx_user1001_app123_recipe123_step1",
+        "length": 1
+      },
+      {
+        "step": "12-2-2",
+        "queue": "tm_test_taskx_user1001_app123_recipe123_step2",
+        "length": 3
+      },
+      {
+        "step": "12-2-3",
+        "queue": "tm_test_taskx_user1001_app123_recipe123_step3",
+        "length": 1
+      }
+    ],
+    
+    "prod_queues": [
+      {
+        "step": "12-2-1",
+        "queue": "tm_prod_taskx_user1001_app123_recipe123_step1",
+        "length": 123
+      },
+      {
+        "step": "12-2-2",
+        "queue": "tm_prod_taskx_user1001_app123_recipe123_step2",
+        "length": 123
+      },
+      {
+        "step": "12-2-3",
+        "queue": "tm_prod_taskx_user1001_app123_recipe123_step3",
+        "length": 123
+      }
+    ]
+    
+  }
+}

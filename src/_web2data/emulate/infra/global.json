@@ -1,0 +1,110 @@
+{
+  "code": 200,
+
+    "org_factory_host": { "id": 100, "is_used": "Y", "name": "12121212", "senior_workers": 1, "junior_workers": 0 },
+
+    "infra_host": [
+    	{ "id": 1, "system": "INFRA", "_index": 1, "name": "INFRA host", "ip1": "1.2.3.4", "ip2": "", "http_port": 8080 },
+    	{ "id": 2, "system": "TASK", "_index": 1, "name": "TASK host", "ip1": "1.2.3.4", "ip2": "", "http_port": 8080 }
+    ],
+    
+    "infra_api": [
+    	{ "id": 1, "system": "INFRA", "key": "GET_WORKER_2_USERTASKHOST_MAP", "uri": "123456" },
+    	{ "id": 2, "system": "INFRA", "key": "GET_USER_TASKHOST_WORKER_2_STEPS_MAP", "uri": "123456" },
+    	{ "id": 3, "system": "TASK", "key": "GET_USER_TASKHOST_QUEUE_LIST", "uri": "123456" },
+    	{ "id": 4, "system": "XXX", "key": "121212", "uri": "123456" }
+    ],
+    
+    "infra_config": [
+    	{ "id": 1, "system": "FACTORY", "key": "XXX", "value": "123456" },
+    	{ "id": 2, "system": "FACTORY", "key": "XXX", "value": "123456" },
+    	{ "id": 3, "system": "FACTORY", "key": "XXX", "value": "123456" },
+    	{ "id": 4, "system": "FACTORY", "key": "XXX", "value": "123456" }
+    ],
+    
+    
+    "org": {
+      "id": 100,
+      "name": "12121212"
+    },
+    
+    "org_task_host": {
+      "id": 100,
+      "name": "12121212"
+    },
+    
+    "user": {
+      "id": 100,
+      "name": "12121212"
+    },
+    
+    "user_task_host": {
+      "id": 100,
+      "name": "12121212"
+    },
+    
+    "user_2_taskhosts_MAP": [
+      {
+        "user_id": 100,
+        "task_host_ids": [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5"
+        ]
+      },
+      {
+        "user_id": 200,
+        "task_host_ids": [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5"
+        ]
+      },
+      {
+        "user_id": 300,
+        "task_host_ids": [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5"
+        ]
+      }
+    ],
+    "user_database_hosts": [
+      {},
+      {}
+    ],
+    "org_database_host": [
+      {},
+      {}
+    ],
+    "user_proxy_account": [
+      {},
+      {}
+    ],
+    "org_proxy_account": [
+      {},
+      {}
+    ],
+    "user_verify_account": [
+      {},
+      {}
+    ],
+    "org_vertify_account": [
+      {},
+      {}
+    ],
+    "infra_vertify_provider": [
+      {},
+      {}
+    ],
+
+
+    "factory_id": "1"
+    
+}
