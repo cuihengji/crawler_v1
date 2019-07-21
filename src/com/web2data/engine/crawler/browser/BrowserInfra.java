@@ -197,7 +197,7 @@ public class BrowserInfra {
 				logger.info("new ChromeDriver ---start----");
 				System.setProperty("webdriver.chrome.driver", targetChromeDriver);
 				
-				System.out.println("chromeDriverPathPrefix = " + chromeDriverPathPrefix);
+				//System.out.println("chromeDriverPathPrefix = " + chromeDriverPathPrefix);
 				
 				DesiredCapabilities capabilities = DesiredCapabilities.chrome();
 				//capabilities.setCapability( ChromeOptions.CAPABILITY, getChromeOptions( sessionId, true ) );
@@ -217,7 +217,7 @@ public class BrowserInfra {
 				
 				_webDriver = new ChromeDriver(capabilities);
 				
-				System.out.println( "newWebDriver()._webDriver = " + _webDriver );
+				//System.out.println( "newWebDriver()._webDriver = " + _webDriver );
 				
 				if (_webDriver.toString().contains("on ANY")) {
 					
@@ -259,11 +259,11 @@ public class BrowserInfra {
 				}
 				
 				
-				_webDriver.get( "about:blank?index=" + this.sessionIndex + "&time=" + new Date() );
+				_webDriver.get( "about:blank?seniorSessionIndex=" + this.sessionIndex + "&time=" + new Date() );
 				
-				_webDriver.get( "http://www.bing.com" );
+				//_webDriver.get( "http://www.bing.com" );
 				
-				System.out.println("new ChromeDriver ---end----");
+				//System.out.println("new ChromeDriver ---end----");
 				
 				logger.info("new ChromeDriver ---end----");
 				//跳出while循环

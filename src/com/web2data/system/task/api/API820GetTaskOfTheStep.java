@@ -3,7 +3,7 @@ package com.web2data.system.task.api;
 import com.web2data._global.G2;
 import com.web2data.open.RxTask;
 
-public class API320GetTaskOfTheStep {
+public class API820GetTaskOfTheStep {
 
 	public static RxTask fetchTestTask(int userId, int taskHostId, String step ) {
 		return fetchTask(userId, taskHostId, G2.TEST, step);

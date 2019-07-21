@@ -10,7 +10,7 @@ import com.rkylin.crawler.engine.flood.util.JsonUtil;
 import com.web2data._global.G2;
 import com.web2data.utility.U;
 
-public class API310GetQueueListInTheUserTaskHost {
+public class API810GetQueueListInTheUserTaskHost {
 
 	public static int _code = -1; // 200 - OK
 	private static Map<String, List<String>> _key_testqueues_map = new HashMap<String, List<String>>();
@@ -80,8 +80,8 @@ public class API310GetQueueListInTheUserTaskHost {
 				file = HTTP.doGet("");
 			}
 		
-			API310GetQueueListInTheUserTaskHost json 
-				= JsonUtil.convertJsonStr2Obj(file, API310GetQueueListInTheUserTaskHost.class);
+			API810GetQueueListInTheUserTaskHost json 
+				= JsonUtil.convertJsonStr2Obj(file, API810GetQueueListInTheUserTaskHost.class);
 		
 			_code = json.getCode();
 			_key_testqueues_map.put(userIdTaskHostId, json.getTest_queue_list());
@@ -102,7 +102,7 @@ public class API310GetQueueListInTheUserTaskHost {
 	public List<String> test_queue_list = null;
 	public List<String> prod_queue_list = null;
 
-	public API310GetQueueListInTheUserTaskHost() {}
+	public API810GetQueueListInTheUserTaskHost() {}
 
 
 	public int getCode() {

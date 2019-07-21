@@ -16,7 +16,7 @@ public class Constant {
 	public static final int SENIOR_SESSION_STARTUP_INTERVAL_SCECONDS = 5;
 	
 	// 启动 HttpClient Session的 时间间隔
-	public static final int JUNIOR_SESSION_STARTUP_INTERVAL_SCECONDS = 5;
+	public static final int JUNIOR_SESSION_STARTUP_INTERVAL_SCECONDS = 1;
 	
 	// 没有任务或处理任务失败的Session休息时间
 	public static final int TASK_UNAVAILABLE_OR_EXECUTION_ERROR_SLEEP_SECONDS = 3;
